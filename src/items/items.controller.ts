@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
-import { ItemInterface } from 'src/interfaces/item.interface';
+import { ItemInterface } from 'src/items/interfaces/item.interface';
 import { CreateItemDTO } from './dto/create-item.dto';
 import { ItemsService } from './items.service';
 
@@ -23,12 +23,12 @@ export class ItemsController
     }
 
     @Post()
-    create (
+    async create (
         @Body()
-        { name, quantity, description }: CreateItemDTO
-    ): CreateItemDTO
+        data: CreateItemDTO
+    ): Promise<ItemInterface>
     {
-        return { name, quantity, description };
+        return this.itemService.create( data );
     }
 
     @Delete( ':id' )
@@ -42,10 +42,10 @@ export class ItemsController
     @Put( ':id' )
     async update (
         @Param( 'id' ) id: string,
-        @Body() data: ItemInterface
+        @Body() data: CreateItemDTO
     ): Promise<ItemInterface>
     {
-    return this.itemService.update( id, data );
-}
+        return this.itemService.update( id, data );
+    }
 
 }

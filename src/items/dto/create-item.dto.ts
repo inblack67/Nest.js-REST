@@ -1,6 +1,6 @@
 export class CreateItemDTO
 {
     readonly name: string;
-    readonly description: string;
-    readonly quantity: string;
+    readonly desc: string;
+    readonly qty: number;
 }

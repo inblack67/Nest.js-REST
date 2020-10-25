@@ -4,10 +4,10 @@ export const ItemSchema = new mongoose.Schema( {
         type: String,
         required: true
     },
-    description: {
+    desc: {
         type: String,
     },
-    quantity: {
+    qty: {
         type: Number,
         required: true
     },

@@ -4,7 +4,6 @@ export interface ItemInterface extends Document
 {
     id?: string,
     name: string,
-    description?: string,
-    quantitiy: number,
-    createdAt?: string;
+    desc: string,
+    qty: number,
 }

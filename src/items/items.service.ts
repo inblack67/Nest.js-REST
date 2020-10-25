@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ItemInterface } from 'src/interfaces/item.interface';
+import { ItemInterface } from 'src/items/interfaces/item.interface';
+import { CreateItemDTO } from './dto/create-item.dto';
 
 @Injectable()
 export class ItemsService
 {
     constructor (
-        @InjectModel( 'ItemModel' )
+        @InjectModel( 'Item' )
         private readonly itemModel: Model<ItemInterface>
     ) { }
 
@@ -26,12 +27,12 @@ export class ItemsService
         return await this.itemModel.findByIdAndDelete( { _id: id } );
     }
 
-    async update ( id: string, data: ItemInterface ): Promise<ItemInterface>
+    async update ( id: string, data: CreateItemDTO ): Promise<ItemInterface>
     {
         return await this.itemModel.findByIdAndUpdate( id, data, { new: true } );
     }
 
-    async create ( data: ItemInterface ): Promise<ItemInterface>
+    async create ( data: CreateItemDTO ): Promise<ItemInterface>
     {
         return await this.itemModel.create( data );
     }
